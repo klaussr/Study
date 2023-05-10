@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 public class MappedChannelRead {
     public static void main(String[] args) {
-        try (FileChannel fc = (FileChannel) Files.newByteChannel(Paths.get("test.txt"))){
+        try (FileChannel fc = (FileChannel) Files.newByteChannel(Paths.get("test2.txt"))){
             long fsize = fc.size();
             MappedByteBuffer mappedByteBuffer = fc.map(FileChannel.MapMode.READ_ONLY,0, fsize);
             for (int i = 0; i < fsize; i++) {
