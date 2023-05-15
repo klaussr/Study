@@ -45,7 +45,7 @@ public class Exs {
                 //noinspection InstantiatingAThreadWithDefaultRunMethod
                 foo.second(new Thread());
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.println(e);
             }
         });
         CompletableFuture.runAsync(() -> {
@@ -53,7 +53,7 @@ public class Exs {
                 //noinspection InstantiatingAThreadWithDefaultRunMethod
                 foo.first(new Thread());
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.println(e);
             }
         });
         CompletableFuture.runAsync(() -> {
@@ -61,7 +61,7 @@ public class Exs {
                 //noinspection InstantiatingAThreadWithDefaultRunMethod
                 foo.third(new Thread());
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.println(e);
             }
         });
     }
