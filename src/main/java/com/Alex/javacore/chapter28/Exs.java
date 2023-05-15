@@ -42,6 +42,7 @@ public class Exs {
        Foo foo = new Foo();
         CompletableFuture.runAsync(() -> {
             try {
+                //noinspection InstantiatingAThreadWithDefaultRunMethod
                 foo.second(new Thread());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -49,6 +50,7 @@ public class Exs {
         });
         CompletableFuture.runAsync(() -> {
             try {
+                //noinspection InstantiatingAThreadWithDefaultRunMethod
                 foo.first(new Thread());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -56,6 +58,7 @@ public class Exs {
         });
         CompletableFuture.runAsync(() -> {
             try {
+                //noinspection InstantiatingAThreadWithDefaultRunMethod
                 foo.third(new Thread());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
