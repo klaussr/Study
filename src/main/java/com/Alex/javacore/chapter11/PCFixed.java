@@ -25,11 +25,12 @@ class Q1 {
             } catch (InterruptedException e) {
                 System.out.println("Исключение типа Interrupted Exception перехвачено");
             }
+        }
             this.n = n;
             valueSet = true;
             System.out.println("Отправлено " + n);
             notify();
-        }
+
     }
 }
 class Producer1 implements Runnable {
