@@ -11,58 +11,53 @@ class Foo {
         sThird = new Semaphore(0);
     }
 
-    public void first(Runnable printFirst) throws InterruptedException {
+    public void first(Runnable printFirst) {
         printFirst.run();
         print("first");
         sSecond.release();
+    }
+
+    public void second(Runnable printSecond) {
+        try {
+            sSecond.acquire();
+            printSecond.run();
+            print("second");
+            sThird.release();
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
 
     }
 
-    public void second(Runnable printSecond) throws InterruptedException {
-        sSecond.acquire();
-        printSecond.run();
-        print("second");
-        sThird.release();
-
+    public void third(Runnable printThird) {
+        try {
+            sThird.acquire();
+            printThird.run();
+            print("third");
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
     }
 
-    public void third(Runnable printThird) throws InterruptedException {
-        sThird.acquire();
-        printThird.run();
-        print("third");
-    }
-
-    public  void print(String s) {
+    public void print(String s) {
         System.out.println(s);
     }
 }
 
 public class Exs {
     public static void main(String[] args) {
-       Foo foo = new Foo();
+        Foo foo = new Foo();
         CompletableFuture.runAsync(() -> {
-            try {
                 //noinspection InstantiatingAThreadWithDefaultRunMethod
                 foo.second(new Thread());
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
         });
         CompletableFuture.runAsync(() -> {
-            try {
                 //noinspection InstantiatingAThreadWithDefaultRunMethod
                 foo.first(new Thread());
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
         });
         CompletableFuture.runAsync(() -> {
-            try {
                 //noinspection InstantiatingAThreadWithDefaultRunMethod
                 foo.third(new Thread());
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
         });
     }
 }
