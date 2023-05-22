@@ -1,0 +1,24 @@
+1) select FirstName, LastName, City, State
+   from
+       Person left join Address on Person.PersonId = Address.PersonId;
+
+2) select(select Salary from Employee
+   order by Salary desc
+   limit 1 offset 1) as SecondHighestSalary;
+
+3)select a.name as Employee
+  from
+      Employee a, Employee b
+  where a.ManagerId = b.Id and a.Salary > b.Salary;
+
+4) select Email from Person
+   group by Email
+   having count(*) > 1;
+
+5) select Name as Customers from Customers
+   where Id not in (
+       select CustomerId from Orders);
+
+6)select class from courses
+  group by class
+  having count(*) >= 5;
